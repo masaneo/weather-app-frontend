@@ -10,3 +10,12 @@ export async function fetchForecast(latitude, longitude) {
         },
     });
 }
+
+export async function fetchWeeklySummary(latitude, longitude) {
+    return await axios.get(`${BASE_URL}/weeklySummary`, {
+        params: {
+            latitude,
+            longitude
+        },
+    });
+}

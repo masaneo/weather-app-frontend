@@ -21,19 +21,22 @@
 
       <div v-else>
         <WeatherTable :forecastData="forecastData" />
+        <WeeklySummary :weeklySummaryResponse="weeklySummaryData" />
       </div>
     </main>
   </div>
 </template>
 
 <script>
-import WeatherTable from './components/WeatherTable.vue'
-import { fetchForecast } from "./services/weather";
+import WeatherTable from './components/WeatherTable.vue';
+import WeeklySummary from './components/WeeklySummary.vue';
+import { fetchForecast, fetchWeeklySummary } from "./services/weather";
 
 export default {
   name: 'App',
   components: {
-    WeatherTable
+    WeatherTable,
+    WeeklySummary,
   },
   data() {
     return {
@@ -41,13 +44,17 @@ export default {
       latitude: null,
       longitude: null,
       forecastData: [],
+      weeklySummaryData: [],
     };
   },
   methods: {
     async fetchData() {
       try {
         const forecastResponse = await fetchForecast(this.latitude, this.longitude);
+        const weeklySummaryResponse = await fetchWeeklySummary(this.latitude, this.longitude);
         this.forecastData = forecastResponse.data;
+        this.weeklySummaryData = weeklySummaryResponse.data;
+        console.log("weeklySummaryData: ", this.weeklySummaryData);
         this.locationSelected = true;
       } catch (error) {
         alert("Nie udało się uzyskać danych. Sprawdź podaną lokalizację lub spróbuj ponownie.");
