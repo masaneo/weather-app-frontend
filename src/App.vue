@@ -3,7 +3,7 @@
     <header>
       <h1 @click="this.locationSelected = false">Prognoza pogody</h1>
       <button @click="toggleTheme">
-        {{ theme === "light" ? "Włącz tryb jasny" : "Włącz tryb ciemny" }}
+        {{ theme === "light" ? "Włącz tryb ciemny" : "Włącz tryb jasny" }}
       </button>
     </header>
     <main>
