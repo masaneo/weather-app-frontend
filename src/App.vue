@@ -18,6 +18,7 @@
             Długość geograficzna:
             <input type="number" step="0.00001" min="-180" max="180" v-model="longitude" required />
           </label>
+          <button type="button" @click="getGeolocation">Pobierz lokalizację</button>
           <button type="submit">Prognoza</button>
         </form>
       </div>
@@ -66,6 +67,22 @@ export default {
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", this.theme);
+    },
+    getGeolocation() {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.latitude = position.coords.latitude.toFixed(5);
+            this.longitude = position.coords.longitude.toFixed(5);
+          },
+          (error) => {
+            alert("Nie udało się uzyskać lokalizacji. Sprawdź ustawienia przeglądarki.");
+            console.log(error);
+          }
+        );
+      } else {
+        alert("Twoja przeglądarka nie obsługuje Geolocation API.");
+      }
     }
   }
 }
