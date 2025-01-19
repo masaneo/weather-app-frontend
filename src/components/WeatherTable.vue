@@ -16,8 +16,8 @@
                     <td>
                         <i :class="getWeatherIcon(day.weather_code)" class="icon"></i>
                     </td>
-                    <td>{{ day.temp_max }}</td>
-                    <td>{{ day.temp_min }}</td>
+                    <td>{{ day.temp_max }}℃</td>
+                    <td>{{ day.temp_min }}℃</td>
                     <td>{{ day.estimated_energy_kwh }}</td>
                 </tr>
             </tbody>

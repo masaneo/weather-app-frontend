@@ -1,7 +1,10 @@
 <template>
   <div>
     <header>
-      <h1>Prognoza pogody</h1>
+      <h1 @click="this.locationSelected = false">Prognoza pogody</h1>
+      <button @click="toggleTheme">
+        {{ theme === "light" ? "Włącz tryb jasny" : "Włącz tryb ciemny" }}
+      </button>
     </header>
     <main>
       <div v-if="!locationSelected" class="location-selection">
@@ -45,6 +48,7 @@ export default {
       longitude: null,
       forecastData: [],
       weeklySummaryData: [],
+      theme: "light",
     };
   },
   methods: {
@@ -54,12 +58,15 @@ export default {
         const weeklySummaryResponse = await fetchWeeklySummary(this.latitude, this.longitude);
         this.forecastData = forecastResponse.data;
         this.weeklySummaryData = weeklySummaryResponse.data;
-        console.log("weeklySummaryData: ", this.weeklySummaryData);
         this.locationSelected = true;
       } catch (error) {
         alert("Nie udało się uzyskać danych. Sprawdź podaną lokalizację lub spróbuj ponownie.");
       }
     },
+    toggleTheme() {
+      this.theme = this.theme === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", this.theme);
+    }
   }
 }
 </script>

@@ -1,11 +1,12 @@
 <template>
-    <section>
-        <p>Min Temp: {{ minTemp }}</p>
-        <p>Maks Temp: {{ maxTemp }}</p>
-        <p>Średnie ciśnienie: {{ avgPressure }}</p>
-        <p>Średni czas naświetlenia: {{ (avgSunshine / 3600).toFixed(2) }}h ({{ avg_sunshine }}s)</p>
+    <footer>
+        <h2>Ogólne podsumowanie tygodnia:</h2>
+        <p>Minimalna temperatura: {{ minTemp }}℃</p>
+        <p>Maksymalna temperatura: {{ maxTemp }}℃</p>
+        <p>Średnie ciśnienie: {{ avgPressure }}hPa</p>
+        <p>Średni czas naświetlenia: {{ (avgSunshine / 3600).toFixed(2) }}h ({{ avgSunshine }}s)</p>
         <p>Opis tygodnia: {{ weeklySummary }}</p>
-    </section>
+    </footer>
 </template>
 
 <script>
