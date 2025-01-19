@@ -21,6 +21,7 @@
           <button type="button" @click="getGeolocation">Pobierz lokalizację</button>
           <button type="submit">Prognoza</button>
         </form>
+        <MapPicker @locationSelected="setLocation" />
       </div>
 
       <div v-else>
@@ -34,6 +35,7 @@
 <script>
 import WeatherTable from './components/WeatherTable.vue';
 import WeeklySummary from './components/WeeklySummary.vue';
+import MapPicker from './components/MapPicker.vue';
 import { fetchForecast, fetchWeeklySummary } from "./services/weather";
 
 export default {
@@ -41,6 +43,7 @@ export default {
   components: {
     WeatherTable,
     WeeklySummary,
+    MapPicker,
   },
   data() {
     return {
@@ -83,7 +86,11 @@ export default {
       } else {
         alert("Twoja przeglądarka nie obsługuje Geolocation API.");
       }
-    }
+    },
+    setLocation({ lat, lng }) {
+      this.latitude = lat.toFixed(5);
+      this.longitude = lng.toFixed(5);
+    },
   }
 }
 </script>
